@@ -1,5 +1,5 @@
 // Make connection
-var socket = io.connect('http://localhost:8080');
+var socket = io.connect();
 
 socket.emit('deviceName', 'Web')
 socket.emit('join', 'A new user')
