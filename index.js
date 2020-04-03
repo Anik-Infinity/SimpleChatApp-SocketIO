@@ -1,14 +1,14 @@
 const print = console.log
 const path = require('path')
 const port = process.env.PORT || 8080
-const publicDirPath = path.join(__dirname, '../Public')
+const publicDirectoryPath = path.join(__dirname, '../public')
 const express = require('express')
 const http = require('http')
 const app = express()
 const server = http.createServer(app)
 const io = require('socket.io').listen(server)
 
-app.use(express.static(publicDirPath));
+app.use(express.static('public'));
 
 app.get('/', (req, res) => { 
     res.send('Chat Server is running on port 3000')

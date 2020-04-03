@@ -1,5 +1,5 @@
 // Make connection
-var socket = io.connect();
+const socket = io()
 
 socket.emit('deviceName', 'Web')
 socket.emit('join', 'A new user')
