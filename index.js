@@ -10,7 +10,7 @@ const io = require('socket.io').listen(server)
 
 app.use(express.static('public'));
 
-app.get('/', (req, res) => { 
+app.get('/', (req, res) => {
     res.send('Chat Server is running on port 3000')
 });
 
@@ -18,26 +18,26 @@ let c = 1
 
 io.on('connection', (socket) => {
 
-    io.emit('userCount', 'total user: '+c)
+    io.emit('userCount', 'total user: ' + c)
 
-    socket.on('deviceName', (message)=>{
+    socket.on('deviceName', (message) => {
         print(message)
     })
 
-    socket.on('join', function (userNickname) {
+    socket.on('join', function(userNickname) {
         c = c + 1
-        io.emit('userCount', 'total user: '+c)
-        socket.broadcast.emit('userStatus', userNickname+" has joined the chat");
+        io.emit('userCount', 'total user: ' + c)
+        socket.broadcast.emit('userStatus', userNickname + " has joined the chat");
     })
 
-    socket.on('chat', function(data){
+    socket.on('chat', function(data) {
         io.emit('chat', data);
     });
 
-    socket.on('disconnect', function (userNickname) {
+    socket.on('disconnect', function(userNickname) {
         c = c - 1
-        if(c <= 0) c = 1
-        io.emit('userCount', 'total user: '+c)
+        if (c <= 0) c = 1
+        io.emit('userCount', 'total user: ' + c)
         socket.broadcast.emit('userStatus', userNickname + "has left the chat");
     })
 })
